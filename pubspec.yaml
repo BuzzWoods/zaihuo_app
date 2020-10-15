@@ -32,6 +32,9 @@ dependencies:
     git: https://github.com/LiuC520/flutter_custom_bottom_tab_bar.git
   # add flutter_screenutil 自适应设备宽度
   flutter_screenutil: ^3.1.0
+  # 未读消息badages https://pub.dev/packages/badges
+  badges: ^1.1.3
+
 
 dev_dependencies:
   flutter_test:

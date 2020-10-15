@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navigator/tab_navigator.dart';
+import 'other/tab_navigator.dart';
 
 bool debugPaintBaselinesEnabled = true;
 void main() {
@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'ZAIHUO',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'PingFang',
-      ),
+          primarySwatch: Colors.blue,
+          fontFamily: 'PingFang',
+          highlightColor: Colors.transparent),
       home: TabNavigator(),
     );
   }

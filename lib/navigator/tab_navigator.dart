@@ -1,45 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_custom_bottom_tab_bar/eachtab.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zaihuo_app/pages/home.dart';
 import 'package:zaihuo_app/pages/message.dart';
 import 'package:zaihuo_app/pages/product.dart';
 import 'package:zaihuo_app/pages/mine.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabNavigatorState();
+  _TabNavigatorState createState() => _TabNavigatorState();
 }
 
 class _TabNavigatorState extends State<TabNavigator>
-    with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  int _selectedIndex = 0;
-  var titles = ['首页', '拍品库', '发布', '消息', '我的'];
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  final _defaultColor = Color(0xFF666666);
+  final _activeColor = Color(0xFFe52d2c);
+  int _currentIndex = 0;
+  PageController _controller;
+
   @override
   void initState() {
     super.initState();
-    _tabController =
-        new TabController(vsync: this, initialIndex: 0, length: titles.length);
-    _tabController.addListener(() {
-      // if (_tabController.index == 2) {
-      //   print(_tabController.index);
-      //   setState(() => _tabController.index = 5);
-      // } else {
-      //   setState(() => _selectedIndex = _tabController.index);
-      // }
-
-      // print("liucheng-> ${_tabController.indexIsChanging}");
-    });
+    _controller = PageController(
+      initialPage: 0,
+    );
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
-    // 屏幕适配
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: false);
     return Scaffold(
+      body: PageView(
+        controller: _controller,
+        children: <Widget>[
+          HomePage(),
+          ProductPage(),
+          ProductPage(),
+          MessagePage(),
+          MinePage(),
+        ],
+        physics: NeverScrollableScrollPhysics(),
+      ),
       floatingActionButton: Container(
         height: ScreenUtil().setWidth(100),
         width: ScreenUtil().setWidth(100),
@@ -61,185 +69,115 @@ class _TabNavigatorState extends State<TabNavigator>
           width: ScreenUtil().setHeight(20),
           height: ScreenUtil().setHeight(20),
         ),
-      )
-      // FloatingActionButton(
-      //   elevation: 0,
-      //   highlightElevation: 0,
-      //   focusElevation: 0,
-      //   onPressed: () {
-      //     setState(() {
-      //       _selectedIndex = 2;
-      //       _tabController.index = 2;
-      //     });
-      //   },
-      //   backgroundColor: Color(0xFFFFFFFF),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Image.asset(
-      //         'images/create.png',
-      //         width: ScreenUtil().setHeight(70),
-      //         height: ScreenUtil().setHeight(70),
-      //       )
-      //     ],
-      //   ),
-      // ),
-      ,
+      ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
-      bottomNavigationBar: Container(
-        color: Color(0xFFFFFFFF),
-        height: ScreenUtil().setHeight(100),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Divider(
-              height: 1,
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            _controller.animateToPage(index,
+                curve: Curves.easeIn, duration: Duration(milliseconds: 260));
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'images/home.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              activeIcon: Image.asset(
+                'images/home_active.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              title: Text(
+                '首页',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(20),
+                  color: _currentIndex != 0 ? _defaultColor : _activeColor,
+                ),
+              ),
             ),
-            new TabBar(
-              isScrollable: false,
-              controller: _tabController,
-              indicatorColor: Colors.transparent,
-              labelColor: Color(0xFFe52d2c),
-              labelPadding: EdgeInsets.all(0),
-              unselectedLabelColor: Color(0xFF666666),
-              tabs: <Widget>[
-                EachTab(
-                  width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(93),
-                  padding: EdgeInsets.all(0),
-                  icon: _selectedIndex == 0
-                      ? Image.asset(
-                          'images/home_active.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        )
-                      : Image.asset(
-                          'images/home.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        ),
-                  text: titles[0],
-                  iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
-                  textStyle: TextStyle(
-                    fontSize: ScreenUtil().setSp(20),
-                  ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'images/product.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              activeIcon: Image.asset(
+                'images/product_active.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              title: Text(
+                '拍品库',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(20),
+                  color: _currentIndex != 1 ? _defaultColor : _activeColor,
                 ),
-                EachTab(
-                    width: ScreenUtil().setWidth(64),
-                    height: ScreenUtil().setHeight(93),
-                    padding: EdgeInsets.all(0),
-                    icon: _selectedIndex == 1
-                        ? Image.asset(
-                            'images/product_active.png',
-                            width: ScreenUtil().setWidth(35),
-                            height: ScreenUtil().setHeight(40),
-                          )
-                        : Image.asset(
-                            'images/product.png',
-                            width: ScreenUtil().setWidth(35),
-                            height: ScreenUtil().setHeight(40),
-                          ),
-                    text: titles[1],
-                    iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
-                    textStyle: TextStyle(
-                      fontSize: ScreenUtil().setSp(20),
-                    )),
-                EachTab(
-                  width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(93),
-                  padding: EdgeInsets.all(0),
-                  icon: _selectedIndex == 2
-                      ? Image.asset('images/product.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                          color: Colors.transparent)
-                      : Image.asset('images/product.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                          color: Colors.transparent),
-                  text: titles[2],
-                  iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
-                  textStyle: TextStyle(
-                    fontSize: ScreenUtil().setSp(20),
-                  ),
-                ),
-                EachTab(
-                  width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(93),
-                  padding: EdgeInsets.all(0),
-                  icon: _selectedIndex == 3
-                      ? Image.asset(
-                          'images/message_active.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        )
-                      : Image.asset(
-                          'images/message.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        ),
-                  text: titles[3],
-                  iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
-                  textStyle: TextStyle(
-                    fontSize: ScreenUtil().setSp(20),
-                  ),
-                ),
-                EachTab(
-                  width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(93),
-                  padding: EdgeInsets.all(0),
-                  icon: _selectedIndex == 4
-                      ? Image.asset(
-                          'images/mine_active.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        )
-                      : Image.asset(
-                          'images/mine.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        ),
-                  text: titles[4],
-                  iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
-                  textStyle: TextStyle(
-                    fontSize: ScreenUtil().setSp(20),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ],
-          // crossAxisAlignment: ,
-        ),
-      ),
-      body: TabBarView(
-        physics: NeverScrollableScrollPhysics(), //设置滑动的效果，这个禁用滑动
-        controller: _tabController,
-        children: <Widget>[
-          HomePage(),
-          ProductPage(),
-          ProductPage(),
-          MessagePage(),
-          MinePage(),
-        ],
-      ),
-      // Align(
-      //     child: Container(
-      //       height: 90,
-      //       width: 90,
-      //       decoration: new BoxDecoration(
-      //         border: new Border.all(width: 1.0, color: Colors.red),
-      //         color: Colors.grey,
-      //         borderRadius:
-      //             new BorderRadius.all(new Radius.circular(45.0)),
-      //       ),
-      //     ),
-      //     alignment: Alignment.bottomCenter),
+            BottomNavigationBarItem(
+              icon: Image.asset('images/product.png',
+                  width: ScreenUtil().setWidth(36),
+                  height: ScreenUtil().setHeight(40),
+                  color: Colors.transparent),
+              title: Text(
+                '发布',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(20),
+                  color: _currentIndex != 2 ? _defaultColor : _activeColor,
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'images/message.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              activeIcon: Image.asset(
+                'images/message_active.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              title: Text(
+                '消息',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(20),
+                  color: _currentIndex != 3 ? _defaultColor : _activeColor,
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                'images/mine.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              activeIcon: Image.asset(
+                'images/mine_active.png',
+                width: ScreenUtil().setWidth(36),
+                height: ScreenUtil().setHeight(40),
+              ),
+              title: Text(
+                '我的',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(20),
+                  color: _currentIndex != 4 ? _defaultColor : _activeColor,
+                ),
+              ),
+            ),
+          ]),
     );
   }
 
-  // @override
-// implement wantKeepAlive 重写keepAlive
-// ignore: override_on_non_overriding_member
-  // bool get wantKeepAlive => true;
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
