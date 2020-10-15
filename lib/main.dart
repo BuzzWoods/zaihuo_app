@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'navigator/tab_navigator2.dart';
+import 'navigator/tab_navigator.dart';
 
+bool debugPaintBaselinesEnabled = true;
 void main() {
   runApp(MyApp());
 }

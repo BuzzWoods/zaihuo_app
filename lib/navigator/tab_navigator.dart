@@ -23,12 +23,12 @@ class _TabNavigatorState extends State<TabNavigator>
     _tabController =
         new TabController(vsync: this, initialIndex: 0, length: titles.length);
     _tabController.addListener(() {
-      if (_tabController.index == 2) {
-        print(_tabController.index);
-        return;
-      } else {
-        setState(() => _selectedIndex = _tabController.index);
-      }
+      // if (_tabController.index == 2) {
+      //   print(_tabController.index);
+      //   setState(() => _tabController.index = 5);
+      // } else {
+      //   setState(() => _selectedIndex = _tabController.index);
+      // }
 
       // print("liucheng-> ${_tabController.indexIsChanging}");
     });
@@ -40,60 +40,58 @@ class _TabNavigatorState extends State<TabNavigator>
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: false);
     return Scaffold(
-      floatingActionButton: new Stack(
-        children: [
-          Container(
-            height: ScreenUtil().setHeight(100),
-            width: ScreenUtil().setWidth(100),
-            padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-            decoration: new BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: new BorderRadius.all(
-                    new Radius.circular(ScreenUtil().setWidth(50))),
-                boxShadow: [
-                  new BoxShadow(
-                    color: Color(0x55000000),
-                    spreadRadius: -4.0,
-                    blurRadius: 1.0,
-                    offset: Offset(0.0, -3.5),
-                  )
-                ]),
-            child: Image.asset(
-              'images/create.png',
-              width: ScreenUtil().setHeight(20),
-              height: ScreenUtil().setHeight(20),
-            ),
-          )
-          // FloatingActionButton(
-          //   elevation: 0,
-          //   highlightElevation: 0,
-          //   focusElevation: 0,
-          //   onPressed: () {
-          //     setState(() {
-          //       _selectedIndex = 2;
-          //       _tabController.index = 2;
-          //     });
-          //   },
-          //   backgroundColor: Color(0xFFFFFFFF),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Image.asset(
-          //         'images/create.png',
-          //         width: ScreenUtil().setHeight(70),
-          //         height: ScreenUtil().setHeight(70),
-          //       )
-          //     ],
-          //   ),
-          // ),
-        ],
-      ),
+      floatingActionButton: Container(
+        height: ScreenUtil().setWidth(100),
+        width: ScreenUtil().setWidth(100),
+        padding: EdgeInsets.all(7),
+        decoration: new BoxDecoration(
+            color: Color(0xFFFFFFFF),
+            borderRadius: new BorderRadius.all(
+                new Radius.circular(ScreenUtil().setWidth(100))),
+            boxShadow: [
+              new BoxShadow(
+                color: Color(0x44000000),
+                spreadRadius: ScreenUtil().setWidth(-3.0),
+                blurRadius: ScreenUtil().setWidth(4.6),
+                offset: Offset(0.0, ScreenUtil().setWidth(-3.2)),
+              )
+            ]),
+        child: Image.asset(
+          'images/create.png',
+          width: ScreenUtil().setHeight(20),
+          height: ScreenUtil().setHeight(20),
+        ),
+      )
+      // FloatingActionButton(
+      //   elevation: 0,
+      //   highlightElevation: 0,
+      //   focusElevation: 0,
+      //   onPressed: () {
+      //     setState(() {
+      //       _selectedIndex = 2;
+      //       _tabController.index = 2;
+      //     });
+      //   },
+      //   backgroundColor: Color(0xFFFFFFFF),
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       Image.asset(
+      //         'images/create.png',
+      //         width: ScreenUtil().setHeight(70),
+      //         height: ScreenUtil().setHeight(70),
+      //       )
+      //     ],
+      //   ),
+      // ),
+      ,
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: Container(
         color: Color(0xFFFFFFFF),
         height: ScreenUtil().setHeight(100),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Divider(
               height: 1,
@@ -108,7 +106,7 @@ class _TabNavigatorState extends State<TabNavigator>
               tabs: <Widget>[
                 EachTab(
                   width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(94),
+                  height: ScreenUtil().setHeight(93),
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 0
                       ? Image.asset(
@@ -128,8 +126,8 @@ class _TabNavigatorState extends State<TabNavigator>
                   ),
                 ),
                 EachTab(
-                    width: ScreenUtil().setWidth(60),
-                    height: ScreenUtil().setHeight(94),
+                    width: ScreenUtil().setWidth(64),
+                    height: ScreenUtil().setHeight(93),
                     padding: EdgeInsets.all(0),
                     icon: _selectedIndex == 1
                         ? Image.asset(
@@ -149,7 +147,7 @@ class _TabNavigatorState extends State<TabNavigator>
                     )),
                 EachTab(
                   width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(94),
+                  height: ScreenUtil().setHeight(93),
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 2
                       ? Image.asset('images/product.png',
@@ -168,7 +166,7 @@ class _TabNavigatorState extends State<TabNavigator>
                 ),
                 EachTab(
                   width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(94),
+                  height: ScreenUtil().setHeight(93),
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 3
                       ? Image.asset(
@@ -189,7 +187,7 @@ class _TabNavigatorState extends State<TabNavigator>
                 ),
                 EachTab(
                   width: ScreenUtil().setWidth(43),
-                  height: ScreenUtil().setHeight(9),
+                  height: ScreenUtil().setHeight(93),
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 4
                       ? Image.asset(
@@ -211,6 +209,7 @@ class _TabNavigatorState extends State<TabNavigator>
               ],
             ),
           ],
+          // crossAxisAlignment: ,
         ),
       ),
       body: TabBarView(
