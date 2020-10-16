@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_custom_bottom_tab_bar/eachtab.dart';
@@ -40,51 +41,36 @@ class _TabNavigatorState extends State<TabNavigator>
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: false);
     return Scaffold(
-      floatingActionButton: Container(
-        height: ScreenUtil().setWidth(100),
-        width: ScreenUtil().setWidth(100),
-        padding: EdgeInsets.all(7),
-        decoration: new BoxDecoration(
-            color: Color(0xFFFFFFFF),
-            borderRadius: new BorderRadius.all(
-                new Radius.circular(ScreenUtil().setWidth(100))),
-            boxShadow: [
-              new BoxShadow(
-                color: Color(0x44000000),
-                spreadRadius: ScreenUtil().setWidth(-3.0),
-                blurRadius: ScreenUtil().setWidth(4.6),
-                offset: Offset(0.0, ScreenUtil().setWidth(-3.2)),
-              )
-            ]),
-        child: Image.asset(
-          'images/create.png',
-          width: ScreenUtil().setHeight(20),
-          height: ScreenUtil().setHeight(20),
-        ),
-      )
-      // FloatingActionButton(
-      //   elevation: 0,
-      //   highlightElevation: 0,
-      //   focusElevation: 0,
-      //   onPressed: () {
-      //     setState(() {
-      //       _selectedIndex = 2;
-      //       _tabController.index = 2;
-      //     });
-      //   },
-      //   backgroundColor: Color(0xFFFFFFFF),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Image.asset(
-      //         'images/create.png',
-      //         width: ScreenUtil().setHeight(70),
-      //         height: ScreenUtil().setHeight(70),
-      //       )
-      //     ],
-      //   ),
-      // ),
-      ,
+      floatingActionButton: GestureDetector(
+          onTap: () {
+            setState(() {
+              // _selectedIndex = 2;
+              _tabController.index = 2;
+            });
+            print(_selectedIndex);
+          },
+          child: Container(
+            height: ScreenUtil().setWidth(100),
+            width: ScreenUtil().setWidth(100),
+            padding: EdgeInsets.all(7),
+            decoration: new BoxDecoration(
+                color: Color(0xFFFFFFFF),
+                borderRadius: new BorderRadius.all(
+                    new Radius.circular(ScreenUtil().setWidth(100))),
+                boxShadow: [
+                  new BoxShadow(
+                    color: Color(0x33000000),
+                    spreadRadius: ScreenUtil().setWidth(-3.0),
+                    blurRadius: ScreenUtil().setWidth(4.6),
+                    offset: Offset(0.0, ScreenUtil().setWidth(-3.2)),
+                  )
+                ]),
+            child: Image.asset(
+              'images/create.png',
+              width: ScreenUtil().setHeight(20),
+              height: ScreenUtil().setHeight(20),
+            ),
+          )),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: Container(
@@ -107,8 +93,6 @@ class _TabNavigatorState extends State<TabNavigator>
                 EachTab(
                   width: ScreenUtil().setWidth(43),
                   height: ScreenUtil().setHeight(93),
-                  badgeNo: '12',
-                  badgeColor: Colors.red,
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 0
                       ? Image.asset(
@@ -170,17 +154,26 @@ class _TabNavigatorState extends State<TabNavigator>
                   width: ScreenUtil().setWidth(43),
                   height: ScreenUtil().setHeight(93),
                   padding: EdgeInsets.all(0),
-                  icon: _selectedIndex == 3
-                      ? Image.asset(
-                          'images/message_active.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        )
-                      : Image.asset(
-                          'images/message.png',
-                          width: ScreenUtil().setWidth(35),
-                          height: ScreenUtil().setHeight(40),
-                        ),
+                  icon: Badge(
+                    badgeColor: Color(0xFFe52d2c),
+                    badgeContent: Text(
+                      '2',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: ScreenUtil().setSp(16)),
+                    ),
+                    child: _selectedIndex == 4
+                        ? Image.asset(
+                            'images/message_active.png',
+                            width: ScreenUtil().setWidth(35),
+                            height: ScreenUtil().setHeight(40),
+                          )
+                        : Image.asset(
+                            'images/message.png',
+                            width: ScreenUtil().setWidth(35),
+                            height: ScreenUtil().setHeight(40),
+                          ),
+                  ),
                   text: titles[3],
                   iconPadding: EdgeInsets.fromLTRB(0, 0, 0, 2),
                   textStyle: TextStyle(
@@ -194,12 +187,12 @@ class _TabNavigatorState extends State<TabNavigator>
                   icon: _selectedIndex == 4
                       ? Image.asset(
                           'images/mine_active.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(37),
                           height: ScreenUtil().setHeight(40),
                         )
                       : Image.asset(
                           'images/mine.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(37),
                           height: ScreenUtil().setHeight(40),
                         ),
                   text: titles[4],
@@ -211,7 +204,6 @@ class _TabNavigatorState extends State<TabNavigator>
               ],
             ),
           ],
-          // crossAxisAlignment: ,
         ),
       ),
       body: TabBarView(
@@ -225,18 +217,6 @@ class _TabNavigatorState extends State<TabNavigator>
           MinePage(),
         ],
       ),
-      // Align(
-      //     child: Container(
-      //       height: 90,
-      //       width: 90,
-      //       decoration: new BoxDecoration(
-      //         border: new Border.all(width: 1.0, color: Colors.red),
-      //         color: Colors.grey,
-      //         borderRadius:
-      //             new BorderRadius.all(new Radius.circular(45.0)),
-      //       ),
-      //     ),
-      //     alignment: Alignment.bottomCenter),
     );
   }
 
