@@ -24,14 +24,8 @@ class _TabNavigatorState extends State<TabNavigator>
     _tabController =
         new TabController(vsync: this, initialIndex: 0, length: titles.length);
     _tabController.addListener(() {
-      // if (_tabController.index == 2) {
-      //   // print(_tabController.index);
-      //   setState(() => _tabController.index = 5);
-      // } else {
       setState(() => _selectedIndex = _tabController.index);
-      // }
-
-      print("liucheng-> ${_tabController.indexIsChanging}");
+      // print("liucheng-> ${_tabController.indexIsChanging}");
     });
   }
 
@@ -59,7 +53,7 @@ class _TabNavigatorState extends State<TabNavigator>
                     new Radius.circular(ScreenUtil().setWidth(100))),
                 boxShadow: [
                   new BoxShadow(
-                    color: Color(0x33000000),
+                    color: Color(0x22000000),
                     spreadRadius: ScreenUtil().setWidth(-3.0),
                     blurRadius: ScreenUtil().setWidth(4.6),
                     offset: Offset(0.0, ScreenUtil().setWidth(-3.2)),
@@ -157,12 +151,12 @@ class _TabNavigatorState extends State<TabNavigator>
                   icon: Badge(
                     badgeColor: Color(0xFFe52d2c),
                     badgeContent: Text(
-                      '2',
+                      '3',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: ScreenUtil().setSp(16)),
                     ),
-                    child: _selectedIndex == 4
+                    child: _selectedIndex == 3
                         ? Image.asset(
                             'images/message_active.png',
                             width: ScreenUtil().setWidth(35),
