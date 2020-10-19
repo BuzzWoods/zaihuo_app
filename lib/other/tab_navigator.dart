@@ -91,12 +91,12 @@ class _TabNavigatorState extends State<TabNavigator>
                   icon: _selectedIndex == 0
                       ? Image.asset(
                           'images/home_active.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                         )
                       : Image.asset(
                           'images/home.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                         ),
                   text: titles[0],
@@ -112,12 +112,12 @@ class _TabNavigatorState extends State<TabNavigator>
                     icon: _selectedIndex == 1
                         ? Image.asset(
                             'images/product_active.png',
-                            width: ScreenUtil().setWidth(35),
+                            width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
                           )
                         : Image.asset(
                             'images/product.png',
-                            width: ScreenUtil().setWidth(35),
+                            width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
                           ),
                     text: titles[1],
@@ -131,11 +131,11 @@ class _TabNavigatorState extends State<TabNavigator>
                   padding: EdgeInsets.all(0),
                   icon: _selectedIndex == 2
                       ? Image.asset('images/product.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                           color: Colors.transparent)
                       : Image.asset('images/product.png',
-                          width: ScreenUtil().setWidth(35),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                           color: Colors.transparent),
                   text: titles[2],
@@ -159,12 +159,12 @@ class _TabNavigatorState extends State<TabNavigator>
                     child: _selectedIndex == 3
                         ? Image.asset(
                             'images/message_active.png',
-                            width: ScreenUtil().setWidth(35),
+                            width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
                           )
                         : Image.asset(
                             'images/message.png',
-                            width: ScreenUtil().setWidth(35),
+                            width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
                           ),
                   ),
@@ -181,12 +181,12 @@ class _TabNavigatorState extends State<TabNavigator>
                   icon: _selectedIndex == 4
                       ? Image.asset(
                           'images/mine_active.png',
-                          width: ScreenUtil().setWidth(37),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                         )
                       : Image.asset(
                           'images/mine.png',
-                          width: ScreenUtil().setWidth(37),
+                          width: ScreenUtil().setWidth(40),
                           height: ScreenUtil().setHeight(40),
                         ),
                   text: titles[4],

@@ -3,7 +3,7 @@ import 'other/tab_navigator.dart';
 import 'package:flutter/rendering.dart';
 
 void main() {
-  debugPaintBaselinesEnabled = true;
+  // debugPaintBaselinesEnabled = true;
   runApp(MyApp());
 }
 

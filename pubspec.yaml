@@ -64,6 +64,7 @@ flutter:
     - images/avatar.png
     - images/mine-center.png
     - images/i8oCEW.jpg
+    - images/vip_tag.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

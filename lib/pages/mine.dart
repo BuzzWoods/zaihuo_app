@@ -8,69 +8,44 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
+  // final double titleBarHeight = 130;
   Widget build(BuildContext context) {
-    // 状态栏高度
+    // 用户信息
     final double statusBarHeight = MediaQuery.of(context).padding.top;
-    final double titleBarHeight = 150;
+
+    // topbar高度
+    // final double titleBarHeight = 130;
     // 屏幕适配
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: false);
-    // 安全区域组件
     return Scaffold(
-        body: Stack(
-      children: [
-        Container(
-          decoration:
-              new BoxDecoration(color: Color.fromRGBO(238, 238, 238, 100)),
-        ),
-        Container(
-          height: ScreenUtil().setWidth(400),
-          decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  fit: BoxFit.cover,
-                  image: new AssetImage('images/mine-center.png'))),
-        ),
-        Positioned(
-            top: ScreenUtil().setWidth(300),
-            child: SafeArea(
-              child: Container(
-                  child: Column(
-                children: [
-                  // 头像
-                  Container(
-                      width: ScreenUtil().setWidth(80),
-                      height: ScreenUtil().setWidth(80),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            "images/i8oCEW.jpg",
-                          ),
-                        ),
-                      )),
-                ],
-              )),
-            )),
-        // 标题
-        Container(
-          // width: MediaQuery.of(context).size.width,
-          height: ScreenUtil().setWidth(titleBarHeight),
-          padding: EdgeInsets.only(top: ScreenUtil().setWidth(40)),
-          decoration: BoxDecoration(color: Colors.transparent),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '个人中心',
-                style: TextStyle(
-                    color: Colors.white, fontSize: ScreenUtil().setSp(32)),
-              ),
-            ],
+      body: Stack(
+        children: [
+          ListView(
+            children: [],
           ),
-        )
-      ],
-    ));
+          _topBar
+        ],
+      ),
+    );
+  }
+
+  Widget get _topBar {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: ScreenUtil().setWidth(130),
+      padding: EdgeInsets.only(top: ScreenUtil().setWidth(40)),
+      decoration: BoxDecoration(color: Colors.transparent),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '个人中心',
+            style: TextStyle(
+                color: Colors.white, fontSize: ScreenUtil().setSp(32)),
+          ),
+        ],
+      ),
+    );
   }
 }
