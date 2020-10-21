@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../wdiget/mine/mine_sections.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _MinePageState extends State<MinePage> {
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: false);
     return Scaffold(
+      backgroundColor: Color(0xFFF1F1F1),
       body: Stack(
         children: [
           MediaQuery.removePadding(
@@ -29,22 +31,17 @@ class _MinePageState extends State<MinePage> {
               children: [
                 Container(
                   child: Stack(
-                    overflow: Overflow.visible,
+                    // overflow: Overflow.visible,
                     children: [
                       Positioned(
+                          child: IntrinsicHeight(
                         child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             _background,
-                            Expanded(
-                                child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration:
-                                  BoxDecoration(color: Color(0xFFF1F1F1)),
-                            ))
                           ],
                         ),
-                      ),
+                      )),
                       Container(
                         margin: EdgeInsets.only(
                             top: ScreenUtil().setWidth(titleBarHeight - 6)),
@@ -71,7 +68,14 @@ class _MinePageState extends State<MinePage> {
                     ],
                   ),
                 ),
-                // Text('123123')
+                Container(
+                  padding: EdgeInsets.only(
+                      left: ScreenUtil().setWidth(20),
+                      right: ScreenUtil().setWidth(20)),
+                  child: Column(
+                    children: [BuyerSection()],
+                  ),
+                )
               ],
             ),
           ),
@@ -301,20 +305,31 @@ class _MinePageState extends State<MinePage> {
             ),
           ),
           Divider(
-            height: ScreenUtil().setWidth(1),
-            color: Color(0xfff3f3f3),
+            height: 1,
+            color: Color(0xaadddddd),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '88.88',
                 style: TextStyle(
                     color: Color(0xffF37B1D),
-                    fontWeight: FontWeight.w900,
-                    fontSize: ScreenUtil().setSp(26)),
+                    fontWeight: FontWeight.w400,
+                    fontSize: ScreenUtil().setSp(80)),
               ),
             ],
-          )
+          ),
+          Padding(padding: EdgeInsets.only(top: ScreenUtil().setWidth(20))),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _financeItem('2.11', '余额（元）', '去提现'),
+              _financeItem('0', '待入账（元）', '赏金明细'),
+              _financeItem('1.88', '货款（元）', '商家助手')
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(top: ScreenUtil().setWidth(20))),
         ],
       ),
     );
@@ -338,8 +353,46 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
+// 资金item
+  Column _financeItem(String num, String label, String urlName, {String url}) {
+    return Column(
+      children: [
+        Text('$label',
+            style: TextStyle(
+              color: Color(0xffaaaaaa),
+              fontSize: ScreenUtil().setSp(24),
+            )),
+        Padding(padding: EdgeInsets.only(top: ScreenUtil().setWidth(8))),
+        Text('$num',
+            style: TextStyle(
+                color: Color(0xff333333),
+                fontSize: ScreenUtil().setSp(36),
+                fontWeight: FontWeight.w700)),
+        Padding(padding: EdgeInsets.only(top: ScreenUtil().setWidth(8))),
+        Container(
+          child: Row(
+            children: [
+              Text('$urlName',
+                  style: TextStyle(
+                    color: Color(0xff178CFF),
+                    fontSize: ScreenUtil().setSp(25),
+                  )),
+              Container(
+                padding: EdgeInsets.only(top: ScreenUtil().setWidth(3)),
+                child: Image.asset('images/next.png',
+                    color: Color(0xff178CFF),
+                    height: ScreenUtil().setWidth(20),
+                    width: ScreenUtil().setWidth(20)),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
   Widget _background = Container(
-    height: ScreenUtil().setWidth(410),
+    height: ScreenUtil().setWidth(407),
     decoration: new BoxDecoration(
         image: new DecorationImage(
             fit: BoxFit.cover,
