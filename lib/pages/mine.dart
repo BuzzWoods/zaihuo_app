@@ -73,7 +73,10 @@ class _MinePageState extends State<MinePage> {
                       left: ScreenUtil().setWidth(20),
                       right: ScreenUtil().setWidth(20)),
                   child: Column(
-                    children: [BuyerSection()],
+                    children: [
+                      BuyerSection(),
+                      SalerSection(),
+                    ],
                   ),
                 )
               ],
